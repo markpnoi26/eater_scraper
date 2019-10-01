@@ -8,7 +8,7 @@ class CommandLineInterfaceControls
   
   def city_selection
     puts "Here are the list of City you can take a look at:"
-    (1..10).each {|number| puts "#{number}. City Object #{number}."}
+    Scraper.cities_scraper.each do |name, url|
   end
   
   def city_articles_selection
