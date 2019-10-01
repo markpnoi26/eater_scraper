@@ -6,14 +6,14 @@ class CommandLineInterfaceControls
     puts "Hello, Welcome to Eater Webscraper"
   end
   
-  def city
+  def city_selection
     puts "Here are the list of City you can take a look at:"
-    range(1..10).each {|number| puts "#{number}. City Object #{number}."
+    (1..10).each {|number| puts "#{number}. City Object #{number}."}
   end
   
-  def articles
+  def city_articles_selection
     puts "Here are the list of articles in this city"
-    range(1..10).each {|number| puts "#{number}. Title, by Author(s) #{number}."
+    (1..10).each {|number| puts "#{number}. Title, by Author(s) #{number}."}
   end
   
   def input
@@ -28,4 +28,5 @@ class CommandLineInterfaceControls
     articles
     input
   end
+  
 end
