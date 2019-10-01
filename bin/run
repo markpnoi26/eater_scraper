@@ -4,4 +4,4 @@ require "bundler/setup"
 require "eater_scraper"
 require "CLI_Controller.rb"
 
-CommandLineInterfaceControls.new.run
+Scraper.cities_scraper
