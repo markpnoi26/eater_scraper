@@ -2,16 +2,6 @@ require "nokogiri"
 require "open-uri"
 
 
-city_url = "https://seattle.eater.com/"
-city_doc = Nokogiri::HTML(open(city_url))
-
-# city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
-# city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
-# city_doc.css("span.c-byline__item").css("a").text #authors
-# city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
-
-
-
 class Scraper
   attr_accessor :city_array, :article_array
   
