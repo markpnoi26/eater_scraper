@@ -5,15 +5,15 @@ require "open-uri"
 city_url = "https://seattle.eater.com/"
 city_doc = Nokogiri::HTML(open(city_url))
 
-city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
-city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
-city_doc.css("span.c-byline__item").css("a").text #authors
-city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+# city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
+# city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
+# city_doc.css("span.c-byline__item").css("a").text #authors
+# city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
 
 
 
 class Scraper
-  attr_accessor :city_array, :latest_array
+  attr_accessor :city_array, :article_array
   
   def self.cities_scraper
     
@@ -30,27 +30,21 @@ class Scraper
     puts @city_array
   end
   
-  def self.latest_scraper(city_url)
-    city_doc = Nokogiri::HTML(open(city_url))
-    @latest_array = []
-    city_doc.each do |latest|
-      
-      
-    city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
-    city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
-    city_doc.css("span.c-byline__item").css("a").text #authors
-    city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+  def self.article_scraper(city_url)
     
-    #return array
-    article_array = [{
-      :title => "Best food in Seattle",
-      :authors => ["Joe Dane", "Roe Quade"],
-      :url => "url.bestfoodinseattle.eater"
-    }, {
-      :title => "Best food in Atlanta",
-      :authors => ["One Roe"]
-      :url => "url.bestfoodinatlanta.eater"
-    }]
+    @article_array = []
+    city_doc = Nokogiri::HTML(open(city_url))
+    articles = city_doc.css("div.c-entry-box--compact")
+    articles.each do |article|
+      article_hash = {
+        :title => article.css("div.c-entry-box--compact__body").css("h2").text,
+        :authors => article.css("span.c-byline__item").css("a").collect {|name| name.css("span.c-byline__author-name").text},
+        :url => article.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value,
+        :date_posted => article.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+      }
+      @article_array << article_hash
+    end
+    puts @article_array  
   end
   
 end
