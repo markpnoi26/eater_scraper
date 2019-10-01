@@ -9,11 +9,11 @@ require "open-uri"
 # cities.search("h2").css("a").attribute("href").value #city urls
 
 class Scraper
-  attr_accessor :array
+  attr_accessor :city_array
   
   def self.cities_scraper
     
-    @array = []
+    @city_array = []
     doc = Nokogiri::HTML(open("https://www.eater.com/cities-directory"))
     cities = doc.css("div.c-directory__short-body")
     cities.each do |city|
@@ -21,13 +21,13 @@ class Scraper
         :name => city.search("h2").text,
         :url => city.search("h2").css("a").attribute("href").value
       }
-      @array << city_hash
+      @city_array << city_hash
     end
-    @array
+    puts @city_array
   end
   
   # def self.latest_scraper(url)
-  #   #returns a hash of each latest news for the given city
+  #   #return array
   #   article_array = [{
   #     :title => "Best food in Seattle",
   #     :authors => ["Joe Dane", "Roe Quade"],

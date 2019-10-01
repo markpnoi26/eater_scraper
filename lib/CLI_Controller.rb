@@ -8,7 +8,7 @@ class CommandLineInterfaceControls
   
   def city_selection
     puts "Here are the list of City you can take a look at:"
-    Scraper.cities_scraper.each do |name, url|
+    # Scraper.cities_scraper.each do |name, url|
   end
   
   def city_articles_selection
