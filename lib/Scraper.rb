@@ -1,15 +1,19 @@
 require "nokogiri"
 require "open-uri"
 
-# url = "https://www.eater.com/cities-directory"
-# doc = Nokogiri::HTML(open(url))
 
-# cities = doc.css("div.c-directory__short-body")
-# cities.search("h2").text #city names array
-# cities.search("h2").css("a").attribute("href").value #city urls
+city_url = "https://seattle.eater.com/"
+city_doc = Nokogiri::HTML(open(city_url))
+
+city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
+city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
+city_doc.css("span.c-byline__item").css("a").text #authors
+city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+
+
 
 class Scraper
-  attr_accessor :city_array
+  attr_accessor :city_array, :latest_array
   
   def self.cities_scraper
     
@@ -26,17 +30,27 @@ class Scraper
     puts @city_array
   end
   
-  # def self.latest_scraper(url)
-  #   #return array
-  #   article_array = [{
-  #     :title => "Best food in Seattle",
-  #     :authors => ["Joe Dane", "Roe Quade"],
-  #     :url => "url.bestfoodinseattle.eater"
-  #   }, {
-  #     :title => "Best food in Atlanta",
-  #     :authors => ["One Roe"]
-  #     :url => "url.bestfoodinatlanta.eater"
-  #   }]
-  # end
+  def self.latest_scraper(city_url)
+    city_doc = Nokogiri::HTML(open(city_url))
+    @latest_array = []
+    city_doc.each do |latest|
+      
+      
+    city_doc.css("div.c-entry-box--compact__body").css("h2").text #latest title
+    city_doc.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value #latest url
+    city_doc.css("span.c-byline__item").css("a").text #authors
+    city_doc.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+    
+    #return array
+    article_array = [{
+      :title => "Best food in Seattle",
+      :authors => ["Joe Dane", "Roe Quade"],
+      :url => "url.bestfoodinseattle.eater"
+    }, {
+      :title => "Best food in Atlanta",
+      :authors => ["One Roe"]
+      :url => "url.bestfoodinatlanta.eater"
+    }]
+  end
   
 end
