@@ -1,4 +1,6 @@
 require_relative "Scraper.rb"
+require_relative "Article.rb"
+require_relative "City.rb"
 
 class CommandLineInterfaceControls
   

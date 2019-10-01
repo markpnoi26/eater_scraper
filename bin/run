@@ -4,5 +4,9 @@ require "bundler/setup"
 require "eater_scraper"
 require "CLI_Controller.rb"
 
-#Scraper.cities_scraper
+cities = Scraper.cities_scraper
 seattle = Scraper.article_scraper("https://seattle.eater.com/")
+City.create_from_array(cities)
+Article.create_from_array(seattle)
+
+print Article.all
