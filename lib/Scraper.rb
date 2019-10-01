@@ -17,7 +17,7 @@ class Scraper
       }
       @city_array << city_hash
     end
-    puts @city_array
+    @city_array
   end
   
   def self.article_scraper(city_url)
@@ -34,7 +34,7 @@ class Scraper
       }
       @article_array << article_hash
     end
-    puts @article_array  
+    @article_array  
   end
   
 end

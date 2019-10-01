@@ -5,4 +5,4 @@ require "eater_scraper"
 require "CLI_Controller.rb"
 
 #Scraper.cities_scraper
-Scraper.article_scraper("https://seattle.eater.com/")
+seattle = Scraper.article_scraper("https://seattle.eater.com/")
