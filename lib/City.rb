@@ -11,6 +11,10 @@ class City
     @@all << self
   end
   
+  def add_articles(articles_array)
+    articles_array.each {|article| article.city = self}
+  end
+  
   def self.create_from_array(city_array)
     city_array.each do |city_hash|
       newCity_oi = City.new(city_hash)
@@ -18,7 +22,12 @@ class City
   end
   
   def self.all
-    @@all
+    if @@all.count == 0
+      Scraper.cities_scraper
+      @@all
+    else
+      @@all
+    end
   end
   
   def self.clear_all

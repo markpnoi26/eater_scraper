@@ -16,7 +16,7 @@ class Scraper
       }
       @city_array << city_hash
     end
-    @city_array
+    City.create_from_array(@city_array)
   end
   
   def self.article_scraper(city_url)
