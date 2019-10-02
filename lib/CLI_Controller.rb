@@ -25,11 +25,29 @@ class CommandLineInterfaceControls
       articles_array = Scraper.article_scraper(City.all[user_input - 1].url)
       Article.create_from_array(articles_array)
       Article.all.each do |article|
-        puts "========================"
+        puts "=============================================================================="
         puts "#{article.title}"
         puts "by: #{(article.authors.count == 2)? article.authors.join(" and "): article.authors[0]}"
         puts "posted on #{article.date_posted} 2019"
+        puts "read at : #{article.url}"
+        puts "=============================================================================="
       end
+      Article.clear_all
+    else
+      display_articles_by_city
+    end
+  end
+
+  def run
+    welcome
+    display_cities
+    display_articles_by_city
+    puts "Would you like to visit another city? (Y/N)"
+    user_input = gets.strip
+    if user_input.downcase == "y"
+      run
+    else
+      puts "Thank you for visiting us today!"
     end
   end
   
