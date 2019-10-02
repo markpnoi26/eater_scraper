@@ -27,7 +27,7 @@ class CommandLineInterfaceControls
       Article.all.each do |article|
         puts "========================"
         puts "#{article.title}"
-        puts "by: #{(article.authors.count < 1)? article.authors.join(" and ")|}"
+        puts "by: #{(article.authors.count == 2)? article.authors.join(" and "): article.authors[0]}"
         puts "posted on #{article.date_posted} 2019"
       end
     end
