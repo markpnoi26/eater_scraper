@@ -6,7 +6,6 @@ class CommandLineInterfaceControls
   
   def welcome
     puts "Hello, Welcome to Eater Webscraper"
-    
   end
   
   def display_cities
@@ -28,7 +27,7 @@ class CommandLineInterfaceControls
       Article.all.each do |article|
         puts "========================"
         puts "#{article.title}"
-        puts "#{article.authors.join("and")}"
+        puts "by: #{(article.authors.count < 1)? article.authors.join(" and ")|}"
         puts "posted on #{article.date_posted} 2019"
       end
     end

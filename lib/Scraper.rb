@@ -27,9 +27,9 @@ class Scraper
     articles.each do |article|
       article_hash = {
         :title => article.css("div.c-entry-box--compact__body").css("h2").text,
-        :authors => article.css("span.c-byline__item").css("a").collect {|name| name.css("span.c-byline__author-name").text},
         :url => article.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value,
-        :date_posted => article.css("span.c-byline__item").css("time").text.gsub("\n", "").strip
+        :date_posted => article.css("span.c-byline__item").css("time").text.gsub("\n", "").strip,
+        :authors => (article.css("span.c-byline__item").css("a").collect {|name| name.css("span.c-byline__author-name").text}).reject { |name| name.to_s.empty? }
       }
       @article_array << article_hash
     end
