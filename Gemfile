@@ -5,3 +5,4 @@ gemspec
 
 gem "nokogiri", "1.10"
 gem "pry"
+gem "colorize"

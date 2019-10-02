@@ -1,6 +1,7 @@
 require_relative "Scraper.rb"
 require_relative "Article.rb"
 require_relative "City.rb"
+require 'colorize'
 
 class CommandLineInterfaceControls
   
@@ -25,12 +26,12 @@ class CommandLineInterfaceControls
       articles_array = Scraper.article_scraper(City.all[user_input - 1].url)
       Article.create_from_array(articles_array)
       Article.all.each do |article|
-        puts "=============================================================================="
-        puts "#{article.title}"
+        puts "==============================================================================".colorize(:green)
+        puts "#{article.title}".upcase
         puts "by: #{(article.authors.count == 2)? article.authors.join(" and "): article.authors[0]}"
         puts "posted on #{article.date_posted} 2019"
-        puts "read at : #{article.url}"
-        puts "=============================================================================="
+        puts "read at : " + "#{article.url}".colorize(:light_blue)
+        puts "==============================================================================".colorize(:green)
       end
       Article.clear_all
     else
