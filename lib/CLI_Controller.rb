@@ -24,6 +24,7 @@ class CommandLineInterfaceControls
         puts "by: #{(article.authors.count == 2)? article.authors.join(" and "): article.authors[0]}"
         puts "posted on #{article.date_posted} 2019"
         puts "read at : " + "#{article.url}".colorize(:light_blue)
+        puts "City :" + " #{city_oi.name}".colorize(:light_green)
         puts "==============================================================================".colorize(:green)
       end
     else

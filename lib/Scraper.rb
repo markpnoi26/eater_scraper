@@ -2,7 +2,6 @@ class Scraper
   attr_accessor :city_array, :article_array
   
   def self.cities_scraper
-    
     @city_array = []
     doc = Nokogiri::HTML(open("https://www.eater.com/cities-directory"))
     cities = doc.css("div.c-directory__short-body")
@@ -17,7 +16,6 @@ class Scraper
   end
   
   def self.article_scraper(city_oi)
-    
     @article_array = []
     city_doc = Nokogiri::HTML(open(city_oi.url))
     articles = city_doc.css("div[class='c-entry-box--compact c-entry-box--compact--article']")
