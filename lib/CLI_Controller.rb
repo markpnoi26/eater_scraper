@@ -1,8 +1,3 @@
-require_relative "Scraper.rb"
-require_relative "Article.rb"
-require_relative "City.rb"
-require 'colorize'
-
 class CommandLineInterfaceControls
   
   def welcome
