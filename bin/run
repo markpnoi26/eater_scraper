@@ -4,9 +4,15 @@ require "bundler/setup"
 require "eater_scraper"
 require "CLI_Controller.rb"
 
-cities = Scraper.cities_scraper
-seattle = Scraper.article_scraper("https://seattle.eater.com/")
-City.create_from_array(cities)
-Article.create_from_array(seattle)
 
-print Article.all
+#seattle = Scraper.article_scraper("https://seattle.eater.com/")
+
+#Article.create_from_array(seattle)
+
+
+
+newSession = CommandLineInterfaceControls.new
+newSession.welcome
+newSession.display_cities
+newSession.display_articles_by_city
+  

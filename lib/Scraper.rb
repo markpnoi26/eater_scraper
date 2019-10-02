@@ -1,7 +1,6 @@
 require "nokogiri"
 require "open-uri"
 
-
 class Scraper
   attr_accessor :city_array, :article_array
   

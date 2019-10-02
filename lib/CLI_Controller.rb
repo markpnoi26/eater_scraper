@@ -6,29 +6,24 @@ class CommandLineInterfaceControls
   
   def welcome
     puts "Hello, Welcome to Eater Webscraper"
+    
   end
   
-  def city_selection
-    puts "Here are the list of City you can take a look at:"
-    # Scraper.cities_scraper.each do |name, url|
+  def display_cities
+    puts "Here are the cities you can explore the food scene."
+    city_array = Scraper.cities_scraper
+    City.create_from_array(city_array)
+    City.all.each_with_index do |city, index|
+      puts "#{index + 1}. #{city.name}."
+    end
   end
   
-  def city_articles_selection
-    puts "Here are the list of articles in this city"
-    (1..10).each {|number| puts "#{number}. Title, by Author(s) #{number}."}
-  end
-  
-  def input
-    puts "Please type in the number of what you would like to check out."
-    input = gets.strip
-  end
-  
-  def run
-    welcome
-    city
-    input
-    articles
-    input
+  def display_articles_by_city
+    puts "Please select the number of the city you wish to explore more about. "
+    user_input = gets.strip.to_i
+    if user_input.class == Integer
+       Scraper.(City.all[user_input - 1].url)
+    end
   end
   
 end

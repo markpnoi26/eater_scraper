@@ -21,14 +21,4 @@ class City
     @@all
   end
   
-  def add_articles(articles_oi_array)
-    articles_oi_array.each do |article|
-      article.city = self
-    end
-  end
-  
-  def view_articles
-    Article.all.collect {|article| article.city == self} #returns array of the articles by this city
-  end
-  
 end
