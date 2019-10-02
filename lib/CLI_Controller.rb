@@ -22,7 +22,15 @@ class CommandLineInterfaceControls
     puts "Please select the number of the city you wish to explore more about. "
     user_input = gets.strip.to_i
     if user_input.class == Integer
-       Scraper.(City.all[user_input - 1].url)
+      puts "Here are the latest from #{City.all[user_input - 1].name}: "
+      articles_array = Scraper.article_scraper(City.all[user_input - 1].url)
+      Article.create_from_array(articles_array)
+      Article.all.each do |article|
+        puts "========================"
+        puts "#{article.title}"
+        puts "#{article.authors.join("and")}"
+        puts "posted on #{article.date_posted} 2019"
+      end
     end
   end
   
