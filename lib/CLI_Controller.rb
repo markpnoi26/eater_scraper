@@ -11,7 +11,6 @@ class CommandLineInterfaceControls
   
   def display_cities
     puts "Here are the cities you can explore the food scene."
-    # Scraper.cities_scraper
     City.all.each.with_index(1) do |city, index|
       puts "#{index}. #{city.name}."
     end
@@ -20,9 +19,9 @@ class CommandLineInterfaceControls
   def display_articles_by_city
     puts "Please select the number of the city you wish to explore more about. "
     user_input = gets.strip.to_i
-    if user_input.between?(1, 24)
+    if user_input.between?(1, City.all.count)
       puts "Here are the latest from #{City.all[user_input - 1].name}: "
-      articles_array = Scraper.article_scraper(City.all[user_input - 1].url)
+      articles_array = Scraper.article_scraper(City.all[user_input - 1].url) 
       Article.create_from_array(articles_array)
       Article.all.each do |article|
         puts "==============================================================================".colorize(:green)
@@ -34,7 +33,7 @@ class CommandLineInterfaceControls
       end
       Article.clear_all
     else
-      puts "Please enter a valid input"
+      puts "Please enter a valid number"
       display_articles_by_city
     end
   end
