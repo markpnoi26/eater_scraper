@@ -19,16 +19,17 @@ class Scraper
     City.create_from_array(@city_array)
   end
   
-  def self.article_scraper(city_url)
+  def self.article_scraper(city_oi)
     
     @article_array = []
-    city_doc = Nokogiri::HTML(open(city_url))
+    city_doc = Nokogiri::HTML(open(city_oi.url))
     articles = city_doc.css("div.c-entry-box--compact")
     articles.each do |article|
       article_hash = {
         :title => article.css("div.c-entry-box--compact__body").css("h2").text,
         :url => article.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value,
         :date_posted => article.css("span.c-byline__item").css("time").text.gsub("\n", "").strip,
+        :city => city_oi.name,
         :authors => (article.css("span.c-byline__item").css("a").collect {|name| name.css("span.c-byline__author-name").text}).reject { |name| name.to_s.empty? }
       }
       @article_array << article_hash

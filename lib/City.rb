@@ -2,17 +2,20 @@ class City
   
   @@all = []
   
-  attr_accessor :name, :url
+  attr_accessor :name, :url, :articles
   
   def initialize(city_hash)
     city_hash.each do |attribute_name, attribute_value|
       self.send("#{attribute_name}=", attribute_value)
     end
+    @articles = []
     @@all << self
   end
   
-  def add_articles(articles_array)
-    articles_array.each {|article| article.city = self}
+  def add_articles
+    Article.all.each do |article|
+      @articles << article if article.city == self.name
+    end
   end
   
   def self.create_from_array(city_array)

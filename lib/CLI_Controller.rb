@@ -21,7 +21,7 @@ class CommandLineInterfaceControls
     user_input = gets.strip.to_i
     if user_input.between?(1, City.all.count)
       puts "Here are the latest from #{City.all[user_input - 1].name}: "
-      articles_array = Scraper.article_scraper(City.all[user_input - 1].url) 
+      articles_array = Scraper.article_scraper(City.all[user_input - 1]) 
       Article.create_from_array(articles_array)
       Article.all.each do |article|
         puts "==============================================================================".colorize(:green)
@@ -45,7 +45,6 @@ class CommandLineInterfaceControls
     puts "Would you like to visit another city? (Y/N)"
     user_input = gets.strip
     if user_input.downcase == "y"
-      City.clear_all
       run
     else
       puts "Thank you for visiting us today!"
