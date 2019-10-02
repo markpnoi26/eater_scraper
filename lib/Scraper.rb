@@ -29,7 +29,7 @@ class Scraper
         :title => article.css("div.c-entry-box--compact__body").css("h2").text,
         :url => article.css("div.c-entry-box--compact__body").css("h2").css("a").attribute("href").value,
         :date_posted => article.css("span.c-byline__item").css("time").text.gsub("\n", "").strip,
-        :city => city_oi.name,
+        :city => city_oi,
         :authors => (article.css("span.c-byline__item").css("a").collect {|name| name.css("span.c-byline__author-name").text}).reject { |name| name.to_s.empty? }
       }
       @article_array << article_hash

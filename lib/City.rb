@@ -14,7 +14,7 @@ class City
   
   def add_articles
     Article.all.each do |article|
-      @articles << article if article.city == self.name
+      @articles << article if article.city.name == self.name
     end
   end
   
