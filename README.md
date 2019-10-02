@@ -1,8 +1,6 @@
 # EaterScraper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/eater_scraper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem scrapes the Eater website for relevant news in a desired city.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After running from bin/run, select which city by typing in the corresponding number of city. The latest articles will be shown from earliest to latest based on posted date. Program asks if the user wants to visit another city, if no, the program closes.
 
 ## Development
 
