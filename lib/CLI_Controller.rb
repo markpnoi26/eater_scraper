@@ -21,7 +21,7 @@ class CommandLineInterfaceControls
   def display_articles_by_city
     puts "Please select the number of the city you wish to explore more about. "
     user_input = gets.strip.to_i
-    if user_input.class == Integer
+    if user_input.class == Integer && user_input.between?(1, 24)
       puts "Here are the latest from #{City.all[user_input - 1].name}: "
       articles_array = Scraper.article_scraper(City.all[user_input - 1].url)
       Article.create_from_array(articles_array)
@@ -35,6 +35,7 @@ class CommandLineInterfaceControls
       end
       Article.clear_all
     else
+      puts "Please enter a valid input"
       display_articles_by_city
     end
   end
