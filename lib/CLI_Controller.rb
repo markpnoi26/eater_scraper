@@ -39,11 +39,7 @@ class CommandLineInterfaceControls
     display_articles_by_city
     puts "Would you like to visit another city? (Y/N)"
     user_input = gets.strip
-    if user_input.downcase == "y"
-      run
-    else
-      puts "Thank you for visiting us today!"
-    end
+    user_input.downcase == "y"? run : puts("Thank you for visiting us today!")
   end
   
 end

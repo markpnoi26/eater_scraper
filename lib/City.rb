@@ -25,12 +25,7 @@ class City
   end
   
   def self.all
-    if @@all.count == 0
-      Scraper.cities_scraper
-      @@all
-    else
-      @@all
-    end
+    @@all.count == 0? Scraper.cities_scraper : @@all
   end
   
   def self.clear_all

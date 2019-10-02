@@ -13,6 +13,7 @@ class Scraper
       @city_array << city_hash
     end
     City.create_from_array(@city_array)
+    City.all
   end
   
   def self.article_scraper(city_oi)
