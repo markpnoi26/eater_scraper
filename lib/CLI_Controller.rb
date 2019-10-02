@@ -45,6 +45,7 @@ class CommandLineInterfaceControls
     puts "Would you like to visit another city? (Y/N)"
     user_input = gets.strip
     if user_input.downcase == "y"
+      City.clear_all
       run
     else
       puts "Thank you for visiting us today!"
