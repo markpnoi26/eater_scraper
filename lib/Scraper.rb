@@ -34,7 +34,9 @@ class Scraper
       }
       @article_array << article_hash
     end
-    @article_array  
+    Article.create_from_array(@article_array)
+    city_oi.add_articles
+    city_oi
   end
   
 end

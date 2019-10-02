@@ -20,10 +20,10 @@ class CommandLineInterfaceControls
     puts "Please select the number of the city you wish to explore more about. "
     user_input = gets.strip.to_i
     if user_input.between?(1, City.all.count)
-      puts "Here are the latest from #{City.all[user_input - 1].name}: "
-      articles_array = Scraper.article_scraper(City.all[user_input - 1]) 
-      Article.create_from_array(articles_array)
-      Article.all.each do |article|
+      city_oi = City.all[user_input - 1]
+      puts "Here are the latest from #{city_oi.name}: "
+      Scraper.article_scraper(city_oi) if city_oi.articles.count == 0
+      city_oi.articles.each do |article|
         puts "==============================================================================".colorize(:green)
         puts "#{article.title}".upcase
         puts "by: #{(article.authors.count == 2)? article.authors.join(" and "): article.authors[0]}"
@@ -31,7 +31,6 @@ class CommandLineInterfaceControls
         puts "read at : " + "#{article.url}".colorize(:light_blue)
         puts "==============================================================================".colorize(:green)
       end
-      Article.clear_all
     else
       puts "Please enter a valid number"
       display_articles_by_city
