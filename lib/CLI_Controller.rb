@@ -33,13 +33,25 @@ class CommandLineInterfaceControls
     end
   end
 
+  def continue?
+    user_input = gets.strip
+    if user_input.downcase == "y"
+      run 
+    elsif user_input.downcase != "n"  
+      puts "please enter a valid input."
+      continue?
+    else
+      puts "Thank you for visiting us today!"
+    end
+  end
+    
+
   def run
     welcome
     display_cities
     display_articles_by_city
     puts "Would you like to visit another city? (Y/N)"
-    user_input = gets.strip
-    user_input.downcase == "y"? run : puts("Thank you for visiting us today!")
+    continue?
   end
   
 end
